@@ -1,0 +1,4 @@
+golang.org/dl v0.0.0-20220315170520-faa7218da89a h1:9XQmLUvVWgdvCsxkaOk6rHC3dvrxOeMU+e8N4KikV7o=
+golang.org/dl v0.0.0-20220315170520-faa7218da89a/go.mod h1:IUMfjQLJQd4UTqG1Z90tenwKoCX93Gn3MAQJMOSBsDQ=
+golang.org/x/exp v0.0.0-20220325121720-054d8573a5d8 h1:Xt4/LzbTwfocTk9ZLEu4onjeFucl88iW+v4j4PWbQuE=
+golang.org/x/exp v0.0.0-20220325121720-054d8573a5d8/go.mod h1:lgLbSvA5ygNOMpwM/9anMpWVlVJ7Z+cHWq/eFuinpGE=

@@ -1,0 +1,93 @@
+{{ define "Index" }}
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        http-equiv="X-UA-Compatible"
+        content="IE=edge"
+    >
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <style type="text/css">
+        .tg {
+            border-collapse: collapse;
+            border-color: #aaa;
+            border-spacing: 0;
+        }
+
+        .tg td {
+            background-color: #fff;
+            border-color: #aaa;
+            border-style: solid;
+            border-width: 1px;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            background-color: #f38630;
+            border-color: #aaa;
+            border-style: solid;
+            border-width: 1px;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0pky {
+            border-color: inherit;
+            text-align: left;
+            vertical-align: top
+        }
+    </style>
+    <title>Send Message</title>
+</head>
+
+<body>
+    <form
+        action="/"
+        method="post"
+    >
+        <label>Sender:</label><br>
+        <input
+            type="text"
+            id="sender"
+        ><br>
+        <label>Text:</label><br>
+        <input
+            type="text"
+            id="text1"
+        ><br><br>
+        <button>Submit</button>
+    </form>
+    <br />
+    <br />
+    <table class="tg">
+        <thead>
+            <tr>
+                <th class="tg-0pky">Sender</th>
+                <th class="tg-0pky">Message</th>
+                <th class="tg-0pky">Timestamp</th>
+            </tr>
+        </thead>
+        {{ range . }}
+        <tr>
+            <td>{{ .Sender }}</td>
+            <td> {{ .Message }} </td>
+            <td>{{ .Timestamp }} </td>
+        </tr>
+        {{ end }}
+    </table>
+</body>
+
+{{end}}

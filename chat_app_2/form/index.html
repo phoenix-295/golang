@@ -1,0 +1,83 @@
+{{ define "Index"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+    <style>
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #6a11cb;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+        }
+    </style>
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
+    >
+    <title>Login</title>
+</head>
+
+<body>
+    <form
+        action="login"
+        method="post"
+    >
+        <section
+            class="vh-100"
+            style="background-color: #508bfc;"
+        >
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div
+                            class="card shadow-2-strong"
+                            style="border-radius: 1rem;"
+                        >
+                            <div class="card-body p-5 text-center">
+
+                                <h3 class="mb-5">Sign in</h3>
+
+                                <div class="form-outline mb-4">
+                                    <input
+                                        class="form-control form-control-lg"
+                                        placeholder="User name"
+                                        name="uname"
+                                    />
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input
+                                        type="password"
+                                        class="form-control form-control-lg"
+                                        placeholder="Password"
+                                        name="psw"
+                                    />
+                                </div>
+                                <button
+                                    class="btn btn-primary btn-lg btn-block"
+                                    type="submit"
+                                >Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+
+
+</body>
+
+</html>
+{{ end }}

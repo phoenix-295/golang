@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Trade app</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .float-container {
+        border: 3px solid #fff;
+        padding: 20px;
+      }
+
+      .float-child {
+        width: 50%;
+        float: left;
+        padding: 20px;
+        /* border: 2px solid red; */
+      }
+      .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      .tg td {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        padding: 16px 17px;
+        word-break: normal;
+      }
+      .tg th {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        overflow: hidden;
+        padding: 16px 17px;
+        word-break: normal;
+      }
+      .tg .tg-0lax {
+        text-align: left;
+        vertical-align: top;
+      }
+      .row {
+        display: flex;
+        margin-left: -5px;
+        margin-right: -5px;
+      }
+
+      .column {
+        flex: 50%;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <br /><br />
+      <form id="input-form">
+        <div class="form-group">
+          <input
+            id="input-size"
+            type="text"
+            class="form-control"
+            placeholder="Enter Size"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            id="input-price"
+            type="text"
+            class="form-control"
+            placeholder="Enter Price"
+          />
+        </div>
+        <button class="btn btn-primary" type="submit">Send</button>
+        <p></p>
+        <input
+          type="radio"
+          id="buy"
+          name="buy_sell"
+          value="Buy"
+          checked="checked"
+        />
+        <label for="html">Buy</label>
+        <input type="radio" id="sell" name="buy_sell" value="Sell" />
+        <label for="css">Sell</label><br />
+        <p></p>
+      </form>
+      <div class="row">
+        <div class="column">
+          <table id="mytable" class="tg">
+            <thead>
+              <tr>
+                <th class="tg-0lax">Size</th>
+                <th class="tg-0lax">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="first-row"></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="column">
+          <table id="mytable2" class="tg">
+            <thead>
+              <tr>
+                <th class="tg-0lax">Size</th>
+                <th class="tg-0lax">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="first-row"></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="buy-text"></div>
+      <div id="sell-text"></div>
+    </div>
+  </body>
+  <!-- <script type="text/javascript" src="../public/app.js"></script> -->
+  <script>
+    window.addEventListener("DOMContentLoaded", (_) => {
+      let websocket = new WebSocket("ws://" + window.location.host + "/ws");
+      let room = document.getElementById("buy-text");
+      let room2 = document.getElementById("sell-text");
+      let table1 = document
+        .getElementById("mytable")
+        .getElementsByTagName("tbody")[0];
+
+      let table2 = document
+        .getElementById("mytable2")
+        .getElementsByTagName("tbody")[0];
+
+      websocket.addEventListener("message", function (e) {
+        let data = JSON.parse(e.data);
+        // creating html element
+        let b = document.createElement("tr");
+        let s = document.createElement("tr");
+        let sid = `${data.side1}`;
+        if (sid == "Buy") {
+          // b.innerHTML = `<strong style="color: green;">${data.size1}</strong> &ensp; ${data.price1}`;
+          b.innerHTML = `<td style="color: green;" class="tg-0lax">${data.size1}</td> <td class="tg-0lax">${data.price1}</td>`;
+        }
+        if (sid == "Sell") {
+          // s.innerHTML = `<strong style="color: red;">${data.size1}</strong> &ensp; ${data.price1}`;
+          s.innerHTML = `<td style="color: red;" class="tg-0lax">${data.size1}</td> <td class="tg-0lax">${data.price1}</td>`;
+        }
+
+        //append para at top of chat-text
+        table1.prepend(b);
+        table2.prepend(s);
+      });
+
+      let form = document.getElementById("input-form");
+
+      //event listner for submit button
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let size = +document.getElementById("input-size").value;
+        let price = +document.getElementById("input-price").value;
+        let b_sell = document.querySelector(
+          'input[name="buy_sell"]:checked'
+        ).value;
+        if (size != "" && price != "") {
+          websocket.send(
+            JSON.stringify({
+              side1: b_sell,
+              size1: size,
+              price1: price,
+            })
+          );
+        } else {
+          alert("Enter Size and Price properly");
+        }
+      });
+    });
+  </script>
+</html>
