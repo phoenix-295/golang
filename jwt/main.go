@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"time"
 
+	"encoding/base64"
+
 	"github.com/golang-jwt/jwt"
 )
 
@@ -26,6 +28,12 @@ func encode() string {
 	tokenString, _ := token.SignedString(hmacSampleSecret)
 
 	fmt.Println("Token", tokenString)
+
+	algo, _ := base64.StdEncoding.DecodeString("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9")
+	payload, _ := base64.RawStdEncoding.DecodeString("eyJpZCI6MzIsImV4cCI6MTY1MTA1MDIyMiwiaWF0IjoxNjUxMDUwMTYyfQ")
+
+	fmt.Printf("Decoded text: %s\n", algo)
+	fmt.Printf("Payload %s\n", payload)
 	return tokenString
 }
 
